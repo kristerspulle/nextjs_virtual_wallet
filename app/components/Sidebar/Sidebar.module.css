@@ -12,6 +12,7 @@
   align-items: center;
   color: white;
   font-size: 22px;
+  text-decoration: none;
 }
 
 .link{
@@ -19,6 +20,7 @@
   font-size: 22px;
   padding: 10px 40px;
   width: 100%;
+  text-decoration: none;
 }
 
 .link:hover{
