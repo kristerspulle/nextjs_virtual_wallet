@@ -3,25 +3,11 @@
 import Link from 'next/link'
 import styles from './Sidebar.module.css'
 import Image from 'next/image'
-import { useState, useEffect } from 'react'
+import { useRouter } from 'next/navigation'
+
 
 export const Sidebar = () => {
-  const [walletId, setWalletId] = useState<string | null>(localStorage.getItem('lastOpenedWalletId'));
-
-  useEffect(() => {
-    // Update walletId when localStorage changes
-    const handleStorageChange = () => {
-      setWalletId(localStorage.getItem('lastOpenedWalletId'));
-    };
-
-    window.addEventListener('storage', handleStorageChange);
-
-    return () => {
-      window.removeEventListener('storage', handleStorageChange);
-    };
-  }, []);
-
-  // const walletId = localStorage.getItem('lastOpenedWalletId')
+  const router = useRouter()
 
   return (
     <nav className={styles.sidebar}>
@@ -36,7 +22,7 @@ export const Sidebar = () => {
       />
         Wallet
       </Link>
-      <Link href={`/dashboard/${walletId}`} className={styles.link}>dashboard</Link>
+      <a className={styles.link} onClick={() => router.push(`/dashboard/${localStorage.getItem('lastOpenedWalletId')}`)}>dashboard</a>
       <Link href={'/wallets'} className={styles.link}>wallets</Link>
       <Link href={'/transactions'} className={styles.link}>transactions</Link>
       {/* <Button text='Login/logout' type='button'/> */}

@@ -6,7 +6,10 @@ type Wallet = {
 }
 
 type Transaction = {
-  name: string,
+  _id: string,
+  description: string,
   amount: number,
-  currency: string
+  currency: string,
+  createdAt: Date,
+  type: string
 }

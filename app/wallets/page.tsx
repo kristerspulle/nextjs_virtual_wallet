@@ -20,13 +20,13 @@ export const Wallets = async () => {
         <h1>Wallets</h1>
         <p>List of wallets for your account</p>
       </div>
-        <table className={styles.table}>
+        <table data-toggle='table' className={styles.table}>
           <thead>
             <tr className={styles.tableHeader}>
-              <th>Wallet Name</th>
-              <th>Wallet Balance</th>
-              <th>Wallet Currency</th>
-              <th>Wallet Actions</th>
+              <td>Wallet Name</td>
+              <td>Wallet Balance</td>
+              <td>Wallet Currency</td>
+              <td>Wallet Actions</td>
             </tr>
           </thead>
           <tbody className={styles.walletsWrapper}>

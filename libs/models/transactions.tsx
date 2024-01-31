@@ -2,9 +2,10 @@ import mongoose from 'mongoose';
 const { Schema } = mongoose;
 
 const transactionSchema = new Schema({
-  name: String,
-  balance: Number,
+  description: String,
+  amount: Number,
   currency: String,
+  type: String,
   wallet: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "Wallet",
