@@ -1,0 +1,14 @@
+.wrapper{
+  display: flex;
+  flex-direction: column;
+}
+
+.label{
+
+}
+
+.input{
+  border-radius: 10px;
+  padding: 5px 15px;
+  border: none;
+}

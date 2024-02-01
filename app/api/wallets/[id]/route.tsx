@@ -12,3 +12,13 @@ export const GET = async (request: NextRequest, { params }: { params: { id: stri
     return new NextResponse('Error in fetching MongoDB data: ' + error);
   }
 };
+
+export const DELETE = async (request: NextRequest, { params }: { params: { id: string } }) => {
+  try {
+    await connectToDB();
+    const deleteWallet = await Wallet.findByIdAndDelete(params.id)
+    return new NextResponse(JSON.stringify(deleteWallet))
+  } catch (error) {
+    return new NextResponse('An error occured while deleting wallet: ' + error);
+  }
+}

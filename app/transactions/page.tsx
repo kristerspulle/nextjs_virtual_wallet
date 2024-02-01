@@ -13,15 +13,15 @@ const getTransactions = async () => {
   }
 }
 
-// const newTransaction = async () => {
-//   await fetch('http://localhost:3000/api/wallets/65b7a3ea0b4756f735d7663c/transactions', {
-//     method: 'POST',
-//     headers: {
-//       'Content-type': 'application/json',
-//     },
-//     body: JSON.stringify({description: 'bouldering', type: 'outgoing', amount: 60, currency: 'EUR'}),
-//   })
-// }
+const newTransaction = async () => {
+  await fetch('http://localhost:3000/api/wallets/65b7a3ea0b4756f735d7663c/transactions', {
+    method: 'POST',
+    headers: {
+      'Content-type': 'application/json',
+    },
+    body: JSON.stringify({description: 'bouldering', type: 'outgoing', amount: 60, currency: 'EUR'}),
+  })
+}
 
 
 const Transactions = async () => {
@@ -36,11 +36,11 @@ const Transactions = async () => {
       <table data-toggle='table' className={styles.table}>
         <thead>
           <tr>
-            <td>Description</td>
-            <td>Amount</td>
-            <td>Currency</td>
-            <td>Type</td>
-            <td>Date</td>
+            <th>Description</th>
+            <th>Amount</th>
+            <th>Currency</th>
+            <th>Type</th>
+            <th>Date</th>
           </tr>
         </thead>
         <tbody>

@@ -12,9 +12,9 @@ export const GET = async () => {
   }
 };
 
-// export const POST = async (request: NextRequest) => {
-//   const { title, image, paragraph, tag } = await request.json();
-//   await connectToDB();
-//   await Blog.create({ title, image, paragraph, tag });
-//   return NextResponse.json({ message: 'Comment added' }, { status: 201 });
-// };
+export const POST = async (request: NextRequest) => {
+  const { name, currency } = await request.json();
+  await connectToDB();
+  await Wallet.create({ name, currency, balance: 0 });
+  return NextResponse.json({ message: 'Comment added' }, { status: 201 });
+};
