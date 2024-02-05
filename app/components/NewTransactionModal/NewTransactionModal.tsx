@@ -55,7 +55,7 @@ const NewTransactionModal = ({ isOpen, onClose}: ModalProps) => {
         />
         <Input
           type="text"
-          placeholder="Enter transaction currency"
+          placeholder="EUR"
           id="transactionCurrency"
           value={formValues.currency}
           required={true}
@@ -65,7 +65,7 @@ const NewTransactionModal = ({ isOpen, onClose}: ModalProps) => {
         />
         <Input
           type="text"
-          placeholder="Enter transaction amount"
+          placeholder="0"
           id="transactionAmount"
           value={formValues.amount}
           required={true}

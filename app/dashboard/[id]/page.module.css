@@ -41,6 +41,7 @@
   background-color: white;
   font-size: 30px;
   border-radius: 15px;
+  color: green
 }
 
 .outgoing{
@@ -48,6 +49,7 @@
   background-color: white;
   font-size: 30px;
   border-radius: 15px;
+  color: red;
 }
 
 .recent{
@@ -55,4 +57,9 @@
   background-color: white;
   font-size: 30px;
   border-radius: 15px;
+  width: 100%;
+}
+
+.tableData {
+  text-align: center;
 }

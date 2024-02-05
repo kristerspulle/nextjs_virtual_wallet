@@ -3,7 +3,7 @@ import styles from './Input.module.css';
 type InputProps = {
   id: string;
   type: HTMLInputElement['type'];
-  placeholder: string;
+  placeholder?: string;
   label?: string;
   value: string;
   onChange: (e) => void;

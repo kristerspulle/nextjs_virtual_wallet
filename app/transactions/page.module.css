@@ -1,18 +1,22 @@
-.wrapper{
+.wrapper {
   display: flex;
   padding: 50px 60px;
   flex-direction: column;
   width: 100%;
 }
 
-.header{
+.header {
   display: flex;
   flex-direction: column;
   margin-bottom: 30px;
 }
 
-.table{
+.table {
   background-color: white;
   padding: 20px;
   border-radius: 15px;
+}
+
+.tableData {
+  text-align: center;
 }

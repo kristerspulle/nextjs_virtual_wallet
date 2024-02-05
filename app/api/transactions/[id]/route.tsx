@@ -1,0 +1,13 @@
+import { connectToDB } from '@/libs/database/connectToDB';
+import Transaction from '@/libs/models/transactions';
+import { NextRequest, NextResponse } from 'next/server';
+
+export const DELETE = async (request: NextRequest, { params }: { params: { id: string } }) => {
+  try {
+    await connectToDB();
+    const deleteWallet = await Transaction.findByIdAndDelete(params.id)
+    return new NextResponse(JSON.stringify(deleteWallet))
+  } catch (error) {
+    return new NextResponse('An error occured while deleting transaction: ' + error);
+  }
+}

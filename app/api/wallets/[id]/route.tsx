@@ -22,3 +22,14 @@ export const DELETE = async (request: NextRequest, { params }: { params: { id: s
     return new NextResponse('An error occured while deleting wallet: ' + error);
   }
 }
+
+export const PATCH = async (request: NextRequest, { params }: { params: { id: string } }) => {
+   try {
+    await connectToDB();
+    const body = await request.json()
+    const editWalletName = await Wallet.findByIdAndUpdate(params.id, {name: body})
+    return new NextResponse(JSON.stringify(editWalletName))
+   } catch (error) {
+    return new NextResponse('An error occured while updating wallet name: ' + error)
+   }
+}

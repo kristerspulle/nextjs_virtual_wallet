@@ -1,10 +1,11 @@
 'use client';
 
-import { Button, DeleteButton } from '@/app/components/Buttons/Buttons';
+import { Button } from '@/app/components/Buttons/Buttons';
 import styles from './page.module.css';
 import { useState } from 'react';
 import NewTransactionModal from '@/app/components/NewTransactionModal/NewTransactionModal';
 import { format } from 'date-fns';
+import Link from 'next/link';
 
 type DashboardPageProps = {
   wallet: Wallet;
@@ -13,6 +14,13 @@ type DashboardPageProps = {
 
 const DashboardPage = ({ wallet, transactions }: DashboardPageProps) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const incomingTotal = transactions
+    .filter((transaction) => transaction.type === 'Incoming')
+    .reduce((total, transaction) => total + transaction.amount, 0);
+  const outgoingTotal = transactions
+    .filter((transaction) => transaction.type === 'Outgoing')
+    .reduce((total, transaction) => total + transaction.amount, 0);
+  const balance = incomingTotal - outgoingTotal;
   return (
     <main className={styles.wrapper}>
       <NewTransactionModal
@@ -25,10 +33,10 @@ const DashboardPage = ({ wallet, transactions }: DashboardPageProps) => {
       </div>
       <div className={styles.details}>
         <div className={styles.balanceInfo}>
-          <div className={styles.balance}>{wallet.balance}</div>
+          <div className={styles.balance}>{balance}</div>
           <div className={styles.currency}>{wallet.currency}</div>
-          <div className={styles.incoming}>Incoming</div>
-          <div className={styles.outgoing}>outgoing</div>
+          <div className={styles.incoming}>{incomingTotal}</div>
+          <div className={styles.outgoing}>{outgoingTotal}</div>
           <Button
             text="New Transaction"
             type="button"
@@ -36,7 +44,7 @@ const DashboardPage = ({ wallet, transactions }: DashboardPageProps) => {
           />
         </div>
         <div>
-          <table data-toggle="table" className={styles.recent}>
+          <table className={styles.recent}>
             <thead>
               <tr>
                 <th scope="col">Description</th>
@@ -50,17 +58,21 @@ const DashboardPage = ({ wallet, transactions }: DashboardPageProps) => {
               {transactions.map((transaction) => {
                 return (
                   <tr key={transaction._id}>
-                    <td>{transaction.description}</td>
-                    <td>{transaction.amount}</td>
-                    <td>{transaction.currency}</td>
-                    <td>{transaction.type}</td>
-                    <td>{format(transaction.createdAt, 'dd.MM.yyyy HH:mm')}</td>
+                    <td className={styles.tableData}>
+                      {transaction.description}
+                    </td>
+                    <td className={styles.tableData}>{transaction.amount}</td>
+                    <td className={styles.tableData}>{transaction.currency}</td>
+                    <td className={styles.tableData}>{transaction.type}</td>
+                    <td className={styles.tableData}>
+                      {format(transaction.createdAt, 'dd.MM.yyyy HH:mm')}
+                    </td>
                   </tr>
                 );
               })}
             </tbody>
           </table>
-          <DeleteButton text="See all transactions" type="button" />
+          <Link href={`/transactions/${wallet._id}`}>See all transactions</Link>
         </div>
       </div>
     </main>
