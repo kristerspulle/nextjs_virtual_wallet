@@ -10,7 +10,7 @@ type ModalProps = {
   onClose: () => void
 };
 
-const addNewWallet = async (formValue: {name: string, currency: string}) => {
+const addNewWallet = async (formValue: string) => {
   const newWallet = await fetch('http://localhost:3000/api/wallets', {
     method: 'POST',
     headers: {
@@ -22,15 +22,15 @@ const addNewWallet = async (formValue: {name: string, currency: string}) => {
   return newWallet.json()
 }
 
-const initFormValues = { name: '', currency: '' };
+
 
 const NewWalletModal = ({ isOpen, onClose }: ModalProps) => {
-  const [formValues, setFormValues] = useState(initFormValues);
+  const [formValues, setFormValues] = useState('');
   return (
     <div className={isOpen ? styles.openModal : styles.closedModal} onClick={onClose}>
       <form className={styles.modal} onClick={(e) => e.stopPropagation()} onSubmit={() => {
         addNewWallet(formValues)
-        setFormValues(initFormValues)
+        setFormValues('')
         }
         }>
         <h1>New Wallet</h1>
@@ -38,20 +38,10 @@ const NewWalletModal = ({ isOpen, onClose }: ModalProps) => {
           type="text"
           placeholder="Enter wallet name"
           id="walletName"
-          value={formValues.name}
+          value={formValues}
           required={true}
           onChange={(e) => {
-            setFormValues({...formValues, name: e.target.value})
-          }}
-        />
-        <Input
-          type="text"
-          placeholder="Enter wallet currency"
-          id="walletCurrency"
-          value={formValues.currency}
-          required={true}
-          onChange={(e) => {
-            setFormValues({...formValues, currency: e.target.value})
+            setFormValues(e.target.value)
           }}
         />
         <Button text="Add wallet" type="submit" />

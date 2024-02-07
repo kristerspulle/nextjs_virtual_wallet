@@ -28,20 +28,23 @@ const DashboardPage = ({ wallet, transactions }: DashboardPageProps) => {
         onClose={() => setIsModalOpen(false)}
       />
       <div className={styles.header}>
-        <h1>{wallet.name}</h1>
-        <p>Detailed information about {wallet.name}</p>
+        <div className={styles.headerText}>
+          <h1>{wallet.name}</h1>
+          <p>Detailed information about {wallet.name}</p>
+        </div>
+        <div>
+          <Button
+              text="New Transaction"
+              type="button"
+              onClick={() => setIsModalOpen(true)}
+            />
+        </div>
       </div>
       <div className={styles.details}>
         <div className={styles.balanceInfo}>
           <div className={styles.balance}>{balance}</div>
-          <div className={styles.currency}>{wallet.currency}</div>
-          <div className={styles.incoming}>{incomingTotal}</div>
-          <div className={styles.outgoing}>{outgoingTotal}</div>
-          <Button
-            text="New Transaction"
-            type="button"
-            onClick={() => setIsModalOpen(true)}
-          />
+          <div className={styles.incoming}>{incomingTotal.toFixed(2)}</div>
+          <div className={styles.outgoing}>{outgoingTotal.toFixed(2)}</div>
         </div>
         <div>
           <table className={styles.recent}>
@@ -49,7 +52,6 @@ const DashboardPage = ({ wallet, transactions }: DashboardPageProps) => {
               <tr>
                 <th scope="col">Description</th>
                 <th scope="col">Amount</th>
-                <th scope="col">Currency</th>
                 <th scope="col">Type</th>
                 <th scope="col">Date</th>
               </tr>
@@ -62,7 +64,6 @@ const DashboardPage = ({ wallet, transactions }: DashboardPageProps) => {
                       {transaction.description}
                     </td>
                     <td className={styles.tableData}>{transaction.amount}</td>
-                    <td className={styles.tableData}>{transaction.currency}</td>
                     <td className={styles.tableData}>{transaction.type}</td>
                     <td className={styles.tableData}>
                       {format(transaction.createdAt, 'dd.MM.yyyy HH:mm')}

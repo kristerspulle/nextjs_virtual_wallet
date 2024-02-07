@@ -21,8 +21,20 @@
   background-color: white;
   border-radius: 15px;
   padding: 20px 40px;
+  border-spacing: 0;
 }
 
 .tableData {
   text-align: center;
+}
+
+.table td,
+.table th {
+  border-bottom: 1px solid black;
+  padding: 5px 0;
+}
+.tableActions{
+  justify-content: center;
+  display: flex;
+  gap: 20px;
 }

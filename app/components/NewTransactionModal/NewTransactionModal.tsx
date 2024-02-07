@@ -14,14 +14,14 @@ type ModalProps = {
 
 
 
-const initFormValues = { description: '', currency: '', amount: '', type: 'Incoming'};
+const initFormValues = { description: '', amount: '', type: 'Incoming'};
 
 const NewTransactionModal = ({ isOpen, onClose}: ModalProps) => {
   const [formValues, setFormValues] = useState(initFormValues);
   const params = useParams()
   const router = useRouter()
 
-  const addNewTransaction = async (formValue: { description: string, currency: string, amount: string, type: string}) => {
+  const addNewTransaction = async (formValue: { description: string, amount: string, type: string}) => {
     const newTransaction = await fetch(`http://localhost:3000/api/wallets/${params.id}/transactions`, {
       method: 'POST',
       headers: {
@@ -51,16 +51,6 @@ const NewTransactionModal = ({ isOpen, onClose}: ModalProps) => {
           required={true}
           onChange={(e) => {
             setFormValues({...formValues, description: e.target.value})
-          }}
-        />
-        <Input
-          type="text"
-          placeholder="EUR"
-          id="transactionCurrency"
-          value={formValues.currency}
-          required={true}
-          onChange={(e) => {
-            setFormValues({...formValues, currency: e.target.value})
           }}
         />
         <Input

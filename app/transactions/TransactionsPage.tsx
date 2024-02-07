@@ -5,6 +5,7 @@ import { Button } from '../components/Buttons/Buttons';
 import styles from './page.module.css';
 import { useRouter } from 'next/navigation';
 import { Input } from '../components/Input/Input';
+import { useEffect, useState } from 'react';
 type TransactionsPageProps = {
   transactions: Transaction[];
 };
@@ -23,43 +24,85 @@ const deleteTransaction = async (id: string) => {
 };
 
 const TransactionsPage = ({ transactions }: TransactionsPageProps) => {
+  const [fraudulentTransactions, setFraudulentTransactions] = useState<
+    string[]
+  >([]);
   const router = useRouter();
+
+  const handleCheckboxChange = (transactionId: string) => {
+    setFraudulentTransactions((prevCheckedTransactions) => {
+      if (prevCheckedTransactions.includes(transactionId)) {
+        return prevCheckedTransactions.filter((id) => id !== transactionId);
+      } else {
+        return [...prevCheckedTransactions, transactionId];
+      }
+    });
+  };
+
+  useEffect(() => {
+    console.log('Fetching data from localStorage');
+    const storedFraudulentTransactions = localStorage.getItem(
+      'fraudulentTransactions'
+    );
+    if (storedFraudulentTransactions) {
+      const parsedTransactions = JSON.parse(storedFraudulentTransactions);
+
+      if (Array.isArray(parsedTransactions) && parsedTransactions.length > 0) {
+        setFraudulentTransactions(parsedTransactions);
+      }
+    }
+  }, []);
+
+  useEffect(() => {
+    console.log('Saving data to localStorage');
+    localStorage.setItem(
+      'fraudulentTransactions',
+      JSON.stringify(fraudulentTransactions)
+    );
+  }, [fraudulentTransactions]);
+
   return (
     <main className={styles.wrapper}>
       <div className={styles.header}>
         <h1>Transactions</h1>
         <p>All of the transactions for your Account</p>
       </div>
-      <table className={styles.table}>
+      <table className={`${styles.table} table table-bordered`}>
         <thead>
           <tr>
             <th>Fraudulent</th>
             <th>Wallet</th>
             <th>Description</th>
             <th>Amount</th>
-            <th>Currency</th>
             <th>Type</th>
             <th>Date</th>
             <th>Delete</th>
           </tr>
         </thead>
-        <tbody>
+        <tbody className={styles.tableBody}>
           {transactions.map((transaction: Transaction) => {
             return (
-              <tr key={transaction._id}>
+              <tr
+                key={transaction._id}
+                className={
+                  fraudulentTransactions.includes(transaction._id)
+                    ? styles.fraudulentTransaction
+                    : ''
+                }
+              >
                 <td className={styles.tableData}>
                   <Input
                     type="checkbox"
                     id={transaction._id}
                     required={false}
                     value="fraud"
-                    onChange={() => 'hi'}
+                    checked={fraudulentTransactions.includes(transaction._id)}
+                    onChange={() => handleCheckboxChange(transaction._id)}
                   />
                 </td>
                 <td className={styles.tableData}>wallet name</td>
                 <td className={styles.tableData}>{transaction.description}</td>
                 <td className={styles.tableData}>{transaction.amount}</td>
-                <td className={styles.tableData}>{transaction.currency}</td>
                 <td className={styles.tableData}>{transaction.type}</td>
                 <td className={styles.tableData}>
                   {format(transaction.createdAt, 'dd.MM.yyyy HH:mm')}

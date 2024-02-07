@@ -68,7 +68,6 @@ console.log(walletNameValue);
         <thead>
           <tr>
             <th scope="col">Wallet Name</th>
-            <th scope="col">Wallet Currency</th>
             <th scope="col">Wallet Actions</th>
           </tr>
         </thead>
@@ -86,8 +85,7 @@ console.log(walletNameValue);
                 />
                 ) : (wallet.name)}
               </td>
-              <td className={styles.tableData}>{wallet.currency}</td>
-              <td className={styles.tableData}>
+              <td className={styles.tableActions}>
                 <OpenWalletButton
                   type="button"
                   text="Open"

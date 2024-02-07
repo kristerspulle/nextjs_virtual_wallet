@@ -7,7 +7,8 @@ type InputProps = {
   label?: string;
   value: string;
   onChange: (e) => void;
-  required: boolean
+  required: boolean;
+  checked?: boolean
 };
 
 export const Input = ({
@@ -17,7 +18,8 @@ export const Input = ({
   label,
   value,
   onChange,
-  required
+  required,
+  checked
 }: InputProps) => {
   return (
     <div className={styles.wrapper}>
@@ -32,6 +34,7 @@ export const Input = ({
         value={value}
         onChange={onChange}
         required={required}
+        checked={checked}
       />
     </div>
   );

@@ -13,8 +13,8 @@ export const GET = async () => {
 };
 
 export const POST = async (request: NextRequest) => {
-  const { name, currency } = await request.json();
+  const { name } = await request.json();
   await connectToDB();
-  await Wallet.create({ name, currency, balance: 0 });
-  return NextResponse.json({ message: 'Comment added' }, { status: 201 });
+  await Wallet.create(name);
+  return NextResponse.json({ message: 'Wallet created' }, { status: 201 });
 };

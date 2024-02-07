@@ -15,8 +15,23 @@
   background-color: white;
   padding: 20px;
   border-radius: 15px;
+  border-spacing: 0;
 }
 
 .tableData {
   text-align: center;
 }
+
+.fraudulentTransaction {
+  background-color: rgba(255, 0, 0, 0.301);
+}
+
+.table td:first-child {
+  width: 60px;
+}
+
+.table td,
+.table th {
+  border-bottom: 1px solid black;
+}
+

@@ -7,8 +7,9 @@
 
 .header{
   display: flex;
-  flex-direction: column;
   margin-bottom: 30px;
+  justify-content: space-between;
+  align-items: center;
 }
 
 .details{
@@ -58,8 +59,20 @@
   font-size: 30px;
   border-radius: 15px;
   width: 100%;
+  border-spacing: 0;
 }
 
 .tableData {
   text-align: center;
+}
+
+.headerText{
+  display: flex;
+  flex-direction: column;
+}
+
+.recent td,
+.recent th {
+  border-bottom: 1px solid black;
+  padding: 5px 0;
 }
