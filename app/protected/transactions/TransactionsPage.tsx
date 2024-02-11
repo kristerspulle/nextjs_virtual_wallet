@@ -1,10 +1,10 @@
 'use client';
 
 import { format } from 'date-fns';
-import { Button } from '../components/Buttons/Buttons';
+import { Button } from '../../components/Buttons/Buttons';
 import styles from './page.module.css';
 import { useRouter } from 'next/navigation';
-import { Input } from '../components/Input/Input';
+import { Input } from '../../components/Input/Input';
 import { useEffect, useState } from 'react';
 type TransactionsPageProps = {
   transactions: Transaction[];
@@ -40,7 +40,6 @@ const TransactionsPage = ({ transactions }: TransactionsPageProps) => {
   };
 
   useEffect(() => {
-    console.log('Fetching data from localStorage');
     const storedFraudulentTransactions = localStorage.getItem(
       'fraudulentTransactions'
     );
@@ -54,7 +53,6 @@ const TransactionsPage = ({ transactions }: TransactionsPageProps) => {
   }, []);
 
   useEffect(() => {
-    console.log('Saving data to localStorage');
     localStorage.setItem(
       'fraudulentTransactions',
       JSON.stringify(fraudulentTransactions)

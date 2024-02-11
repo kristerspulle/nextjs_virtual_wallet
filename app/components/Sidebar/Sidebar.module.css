@@ -28,3 +28,7 @@
   background-color: #0e0a5c;
   transition: 0.3s;
 }
+
+.signOut{
+  display: none;
+}

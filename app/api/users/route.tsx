@@ -3,7 +3,7 @@ import Users from '@/libs/models/users';
 import { NextRequest, NextResponse } from 'next/server';
 import { getServerSession } from 'next-auth/next';
 import { authOptions } from '../auth/[...nextauth]/route';
-import { hash } from 'bcrypt';
+import { hash } from 'bcryptjs';
 
 export const GET = async () => {
   const session = await getServerSession(authOptions);

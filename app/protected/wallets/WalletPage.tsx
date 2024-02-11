@@ -5,10 +5,10 @@ import {
   Button,
   OpenWalletButton,
   DeleteButton,
-} from '../components/Buttons/Buttons';
-import NewWalletModal from '../components/NewWalletModal/NewWalletModal';
+} from '../../components/Buttons/Buttons';
+import NewWalletModal from '../../components/NewWalletModal/NewWalletModal';
 import styles from './page.module.css';
-import { Input } from '../components/Input/Input';
+import { Input } from '../../components/Input/Input';
 import { useRouter } from 'next/navigation';
 
 type WalletsPageProps = {

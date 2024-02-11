@@ -1,19 +1,19 @@
-import { compare } from 'bcrypt';
+import { compare } from 'bcryptjs';
 import { connectToDB } from '../database/connectToDB';
-import Users from '../models/users';
+import Users, { IUser } from '../models/users';
 
 interface UserLoginData {
   username: string;
   password: string;
 }
 
-export const loginUser = async ({ username, password }: UserLoginData) => {
+export const loginUser = async ({ username, password }: UserLoginData): Promise<IUser | null> => {
   await connectToDB();
   if (!username || !password) {
     throw new Error('Username or Password was not provided');
   }
 
-  const user = await Users.findOne({
+  const user: IUser | null = await Users.findOne({
     username,
   });
   if (!user) {

@@ -1,11 +1,27 @@
-import mongoose from 'mongoose';
-const { Schema } = mongoose;
+import mongoose, { Schema } from 'mongoose';
 
-const userSchema = new Schema({
-  username: String,
-  password: String
-});
+const userSchema = new Schema(
+  {
+    username: {
+      type: String,
+      required: true,
+      unique: true,
+    },
+    password: {
+      type: String,
+      required: true,
+    },
+  },
+  { timestamps: true }
+);
 
-const Users = mongoose.models.Users || mongoose.model('Users', userSchema);
+export interface IUser extends Document {
+  username: string;
+  password: string;
+  createdAt: string;
+  updatedAt: string;
+}
 
-export default Users;
+const UserModel = mongoose.models.User || mongoose.model('User', userSchema);
+
+export default UserModel;

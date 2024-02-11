@@ -29,11 +29,13 @@ const DashboardPage = ({ wallet, transactions }: DashboardPageProps) => {
   const balance = incomingTotal - outgoingTotal;
 
   const transactionsToShow = transactions.slice(0, displayedTransactions);
+ 
   // const session = getServerSession(authOptions);
 
   // if (!session) {
   //   redirect('api/auth/signin?callbackUrl=/protected');
   // }
+
   return (
     <main className={styles.wrapper}>
       <NewTransactionModal
