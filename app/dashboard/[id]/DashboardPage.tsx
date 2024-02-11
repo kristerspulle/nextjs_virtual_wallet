@@ -5,7 +5,9 @@ import styles from './page.module.css';
 import { useState } from 'react';
 import NewTransactionModal from '@/app/components/NewTransactionModal/NewTransactionModal';
 import { format } from 'date-fns';
-import Link from 'next/link';
+import { authOptions } from '@/app/api/auth/[...nextauth]/route';
+import { getServerSession } from 'next-auth';
+import { redirect } from 'next/navigation';
 
 type DashboardPageProps = {
   wallet: Wallet;
@@ -14,13 +16,24 @@ type DashboardPageProps = {
 
 const DashboardPage = ({ wallet, transactions }: DashboardPageProps) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [displayedTransactions, setDisplayedTransactions] = useState(5);
+
   const incomingTotal = transactions
     .filter((transaction) => transaction.type === 'Incoming')
     .reduce((total, transaction) => total + transaction.amount, 0);
+
   const outgoingTotal = transactions
     .filter((transaction) => transaction.type === 'Outgoing')
     .reduce((total, transaction) => total + transaction.amount, 0);
+
   const balance = incomingTotal - outgoingTotal;
+
+  const transactionsToShow = transactions.slice(0, displayedTransactions);
+  // const session = getServerSession(authOptions);
+
+  // if (!session) {
+  //   redirect('api/auth/signin?callbackUrl=/protected');
+  // }
   return (
     <main className={styles.wrapper}>
       <NewTransactionModal
@@ -34,10 +47,10 @@ const DashboardPage = ({ wallet, transactions }: DashboardPageProps) => {
         </div>
         <div>
           <Button
-              text="New Transaction"
-              type="button"
-              onClick={() => setIsModalOpen(true)}
-            />
+            text="New Transaction"
+            type="button"
+            onClick={() => setIsModalOpen(true)}
+          />
         </div>
       </div>
       <div className={styles.details}>
@@ -50,14 +63,14 @@ const DashboardPage = ({ wallet, transactions }: DashboardPageProps) => {
           <table className={styles.recent}>
             <thead>
               <tr>
-                <th scope="col">Description</th>
-                <th scope="col">Amount</th>
-                <th scope="col">Type</th>
-                <th scope="col">Date</th>
+                <th>Description</th>
+                <th>Amount</th>
+                <th>Type</th>
+                <th>Date</th>
               </tr>
             </thead>
             <tbody>
-              {transactions.map((transaction) => {
+              {transactionsToShow.map((transaction) => {
                 return (
                   <tr key={transaction._id}>
                     <td className={styles.tableData}>
@@ -73,7 +86,23 @@ const DashboardPage = ({ wallet, transactions }: DashboardPageProps) => {
               })}
             </tbody>
           </table>
-          <Link href={`/transactions/${wallet._id}`}>See all transactions</Link>
+          <div>
+            {transactions.length <= transactionsToShow.length ? (
+              <Button
+                text="Collapse"
+                type="button"
+                onClick={() => setDisplayedTransactions(5)}
+              />
+            ) : (
+              <Button
+                text="Show more"
+                type="button"
+                onClick={() =>
+                  setDisplayedTransactions(displayedTransactions + 5)
+                }
+              />
+            )}
+          </div>
         </div>
       </div>
     </main>

@@ -1,27 +1,17 @@
+'use client'
 
+import Link from 'next/link';
+import { Button } from './components/Buttons/Buttons'
+import { useRouter } from 'next/navigation';
 
-const Home = async () => {
-
+const Home = () => {
+  const router = useRouter()
   return (
     <>
-      <div className='box'>home</div>
+      <Button type='button' text='Register' onClick={() => router.push('/register')}/>
+      <Link href={'/api/auth/signin'}>Log in</Link>
     </>
   );
 }
 
 export default Home;
-// wallets: {
-//   name: {
-//     balance: number
-//     transactions: {
-//       type: string
-//       description: string
-//       value: number
-//       fraudulent: boolean
-//     }
-//   },
-//   name1: {
-//     balance:
-//     asjdasd:
-//   }
-// }
