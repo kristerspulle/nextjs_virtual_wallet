@@ -6,11 +6,8 @@ import Image from 'next/image'
 import { useRouter } from 'next/navigation'
 import { Button } from '../Buttons/Buttons'
 import { signOut } from 'next-auth/react'
-import { authOptions } from '@/app/api/auth/[...nextauth]/route'
-import { getServerSession } from 'next-auth'
 
-
-export const Sidebar = async () => {
+export const Sidebar = () => {
   const router = useRouter()
 
   return (
@@ -31,10 +28,7 @@ export const Sidebar = async () => {
       <Link href={'/protected/transactions'} className={styles.link}>transactions</Link>
       <div className={''}>
         <div>Hello</div>
-        <Button text='Logout' type='button' onClick={() => {
-          signOut()
-          router.push('/')
-          }}/>
+        <Button text='Logout' type='button' onClick={() => signOut({ callbackUrl: 'http://localhost:3000/' })}/>
       </div>
     </nav>
   )

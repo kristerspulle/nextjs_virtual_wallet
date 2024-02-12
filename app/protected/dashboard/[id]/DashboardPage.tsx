@@ -5,9 +5,6 @@ import styles from './page.module.css';
 import { useState } from 'react';
 import NewTransactionModal from '@/app/components/NewTransactionModal/NewTransactionModal';
 import { format } from 'date-fns';
-import { authOptions } from '@/app/api/auth/[...nextauth]/route';
-import { getServerSession } from 'next-auth';
-import { redirect } from 'next/navigation';
 
 type DashboardPageProps = {
   wallet: Wallet;
@@ -29,12 +26,6 @@ const DashboardPage = ({ wallet, transactions }: DashboardPageProps) => {
   const balance = incomingTotal - outgoingTotal;
 
   const transactionsToShow = transactions.slice(0, displayedTransactions);
- 
-  // const session = getServerSession(authOptions);
-
-  // if (!session) {
-  //   redirect('api/auth/signin?callbackUrl=/protected');
-  // }
 
   return (
     <main className={styles.wrapper}>

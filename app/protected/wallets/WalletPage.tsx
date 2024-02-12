@@ -1,11 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import {
-  Button,
-  OpenWalletButton,
-  DeleteButton,
-} from '../../components/Buttons/Buttons';
+import { Button } from '../../components/Buttons/Buttons';
 import NewWalletModal from '../../components/NewWalletModal/NewWalletModal';
 import styles from './page.module.css';
 import { Input } from '../../components/Input/Input';
@@ -19,28 +15,46 @@ const WalletPage = ({ wallets }: WalletsPageProps) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [walletNameValue, setWalletNameValue] = useState('');
   const [editingWalletId, setEditingWalletId] = useState<string | null>(null);
-  const router = useRouter()
+  const router = useRouter();
+  
   const handleEdit = (walletId: string) => {
-    const walletToEdit = wallets.find((wallet) => wallet._id === walletId)
+    const walletToEdit = wallets.find((wallet) => wallet._id === walletId);
     setEditingWalletId(walletId);
-    setWalletNameValue(walletToEdit!.name)
+    setWalletNameValue(walletToEdit!.name);
+  };
+
+  const handleOpenWallet = (walletId: string) => {
+    localStorage.setItem('lastOpenedWalletId', walletId || '')
+    router.push(`/protected/dashboard/${walletId}`)
+  }
+
+  const deleteWallet = async (id: string) => {
+    const response = await fetch(`http://localhost:3000/api/wallets/${id}`, {
+      method: 'DELETE',
+      cache: 'no-store',
+    });
+
+    if (!response.ok) {
+      throw new Error(`Failed to fetch data. Status: ${response.status}`);
+    }
+    return response.json();
   };
 
   const handleSave = async (id: string) => {
-    const editWalletName = await fetch(`http://localhost:3000/api/wallets/${id}`, {
-      method: 'PATCH',
-      headers: {
-        'Content-type' : 'application/json'
-      },
-      body: JSON.stringify(walletNameValue)
-    })
-    router.refresh()
+    const editWalletName = await fetch(
+      `http://localhost:3000/api/wallets/${id}`,
+      {
+        method: 'PATCH',
+        headers: {
+          'Content-type': 'application/json',
+        },
+        body: JSON.stringify(walletNameValue),
+      }
+    );
+    router.refresh();
     setEditingWalletId(null);
-    return editWalletName.json()
+    return editWalletName.json();
   };
-
-
-console.log(walletNameValue);
 
   return (
     <main className={styles.wrapper}>
@@ -76,32 +90,45 @@ console.log(walletNameValue);
             <tr key={wallet._id}>
               <td className={styles.tableData}>
                 {editingWalletId === wallet._id ? (
-                <Input
-                  required
-                  id={wallet._id}
-                  type="text"
-                  value={walletNameValue}
-                  onChange={(e) => setWalletNameValue(e.target.value)}
-                />
-                ) : (wallet.name)}
+                  <Input
+                    required
+                    id={wallet._id}
+                    type="text"
+                    value={walletNameValue}
+                    onChange={(e) => setWalletNameValue(e.target.value)}
+                  />
+                ) : (
+                  wallet.name
+                )}
               </td>
               <td className={styles.tableActions}>
-                <OpenWalletButton
+                <Button
                   type="button"
                   text="Open"
-                  walletId={wallet._id}
+                  onClick={() => handleOpenWallet(wallet._id)}
                 />
                 {editingWalletId === wallet._id ? (
-                  <Button type="button" text="Save" onClick={() => handleSave(wallet._id)} />
+                  <Button
+                    type="button"
+                    text="Save"
+                    onClick={() => handleSave(wallet._id)}
+                  />
                 ) : (
-                  <Button type="button" text="Edit" onClick={() => handleEdit(wallet._id)} />
+                  <Button
+                    type="button"
+                    text="Edit"
+                    onClick={() => handleEdit(wallet._id)}
+                  />
                 )}
-                <DeleteButton
+                <Button
                   type="button"
                   text="Delete"
-                  walletId={wallet._id}
+                  onClick={() => {
+                    deleteWallet(wallet._id)
+                    router.refresh()
+                  }}
                 />
-                </td>
+              </td>
             </tr>
           ))}
         </tbody>

@@ -3,7 +3,10 @@ const { Schema } = mongoose;
 
 const walletSchema = new Schema({
   name: String,
-  currency: String
+  user: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "UserModel",
+  },
 });
 
 const Wallet = mongoose.models.Wallet || mongoose.model('Wallet', walletSchema);

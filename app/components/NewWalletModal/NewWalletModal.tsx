@@ -4,10 +4,11 @@ import { useState } from 'react';
 import styles from './NewWalletModal.module.css';
 import { Input } from '../Input/Input';
 import { Button } from '../Buttons/Buttons';
+import { useRouter } from 'next/navigation';
 
 type ModalProps = {
   isOpen: boolean;
-  onClose: () => void
+  onClose: () => void;
 };
 
 const addNewWallet = async (formValue: string) => {
@@ -16,23 +17,30 @@ const addNewWallet = async (formValue: string) => {
     headers: {
       'Content-type': 'application/json',
     },
-    body: JSON.stringify(formValue)
-  })
+    body: JSON.stringify({name: formValue}),
+  });
 
-  return newWallet.json()
-}
-
-
+  return newWallet.json();
+};
 
 const NewWalletModal = ({ isOpen, onClose }: ModalProps) => {
   const [formValues, setFormValues] = useState('');
+  const router = useRouter()
   return (
-    <div className={isOpen ? styles.openModal : styles.closedModal} onClick={onClose}>
-      <form className={styles.modal} onClick={(e) => e.stopPropagation()} onSubmit={() => {
-        addNewWallet(formValues)
-        setFormValues('')
-        }
-        }>
+    <div
+      className={isOpen ? styles.openModal : styles.closedModal}
+      onClick={onClose}
+    >
+      <form
+        className={styles.modal}
+        onClick={(e) => e.stopPropagation()}
+        onSubmit={(e) => {
+          e.preventDefault();
+          addNewWallet(formValues);
+          router.refresh()
+          setFormValues('');
+        }}
+      >
         <h1>New Wallet</h1>
         <Input
           type="text"
@@ -41,7 +49,7 @@ const NewWalletModal = ({ isOpen, onClose }: ModalProps) => {
           value={formValues}
           required={true}
           onChange={(e) => {
-            setFormValues(e.target.value)
+            setFormValues(e.target.value);
           }}
         />
         <Button text="Add wallet" type="submit" />

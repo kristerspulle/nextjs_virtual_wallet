@@ -1,8 +1,7 @@
 type Wallet = {
   _id: string,
   name: string,
-  balance: number,
-  currency: string
+  user: string
 }
 
 type Transaction = {
