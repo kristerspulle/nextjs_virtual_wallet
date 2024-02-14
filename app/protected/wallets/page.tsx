@@ -1,8 +1,10 @@
+import { headers } from 'next/headers';
 import WalletPage from './WalletPage';
 
 const getWallets = async () => {
   const response = await fetch('http://localhost:3000/api/wallets', {
-    cache: 'no-store'
+    cache: 'no-store',
+    headers: headers()
   });
   if(!response.ok) {
     console.log(response)
@@ -10,6 +12,8 @@ const getWallets = async () => {
     return response.json()
   }
 }
+
+
 
 export const Wallets = async () => {
   const wallets = await getWallets()

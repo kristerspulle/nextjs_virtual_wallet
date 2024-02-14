@@ -6,14 +6,11 @@ import { authOptions } from '../auth/[...nextauth]/route';
 
 export const GET = async () => {
   try {
-    await connectToDB();
-    
-    const session = await getServerSession(authOptions);
+    const session = await getServerSession(authOptions)
     const userId = session?.user?.id
-    console.log('get userid',userId);
-    console.log('session',session);
-    const wallets = await Wallet.find({user: '65c8f1ec5e2f289d847231e8'})
-    console.log('Wallets for user:', wallets);
+    
+    await connectToDB();
+    const wallets = await Wallet.find({user: userId})
     return new NextResponse(JSON.stringify(wallets));
   } catch (error) {
     return new NextResponse('err' + error);

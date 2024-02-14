@@ -1,8 +1,10 @@
+import { headers } from 'next/headers';
 import TransactionsPage from './TransactionsPage';
 
 const getTransactions = async () => {
   const response = await fetch('http://localhost:3000/api/transactions', {
-    cache: 'no-store'
+    cache: 'no-store',
+    headers: headers()
   })
 
   if(!response.ok) {
