@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import { Button } from '../../components/Buttons/Buttons';
+import { Button } from '../../components/Button/Button';
 import NewWalletModal from '../../components/NewWalletModal/NewWalletModal';
 import styles from './page.module.css';
 import { Input } from '../../components/Input/Input';
@@ -16,7 +16,7 @@ const WalletPage = ({ wallets }: WalletsPageProps) => {
   const [walletNameValue, setWalletNameValue] = useState('');
   const [editingWalletId, setEditingWalletId] = useState<string | null>(null);
   const router = useRouter();
-  
+
   const handleEdit = (walletId: string) => {
     const walletToEdit = wallets.find((wallet) => wallet._id === walletId);
     setEditingWalletId(walletId);
@@ -24,9 +24,9 @@ const WalletPage = ({ wallets }: WalletsPageProps) => {
   };
 
   const handleOpenWallet = (walletId: string) => {
-    localStorage.setItem('lastOpenedWalletId', walletId || '')
-    router.push(`/protected/dashboard/${walletId}`)
-  }
+    localStorage.setItem('lastOpenedWalletId', walletId || '');
+    router.push(`/protected/dashboard/${walletId}`);
+  };
 
   const deleteWallet = async (id: string) => {
     const response = await fetch(`http://localhost:3000/api/wallets/${id}`, {
@@ -124,8 +124,8 @@ const WalletPage = ({ wallets }: WalletsPageProps) => {
                   type="button"
                   text="Delete"
                   onClick={() => {
-                    deleteWallet(wallet._id)
-                    router.refresh()
+                    deleteWallet(wallet._id);
+                    router.refresh();
                   }}
                 />
               </td>

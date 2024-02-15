@@ -1,21 +1,30 @@
-'use client'
+'use client';
 
 import Link from 'next/link';
-import { Button } from './components/Buttons/Buttons'
+import { Button } from './components/Button/Button';
 import { useRouter } from 'next/navigation';
 import { useSession } from 'next-auth/react';
 
-
 const Home = () => {
-  const router = useRouter()
-  const session = useSession()
-  
+  const router = useRouter();
+  const session = useSession();
+
   return (
     <>
-      <Button type='button' text='Register' onClick={() => router.push('/register')}/>
-      {session.status === 'authenticated' ? ('') : (<Link href={'/api/auth/signin'}>Log in</Link>)}
+      {session.status === 'authenticated' ? (
+        ''
+      ) : (
+        <div>
+          <Button
+          type="button"
+          text="Register"
+          onClick={() => router.push('/register')}
+        />
+          <Link href={'/api/auth/signin'}>Log in</Link>
+        </div>
+      )}
     </>
   );
-}
+};
 
 export default Home;

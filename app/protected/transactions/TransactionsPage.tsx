@@ -1,7 +1,7 @@
 'use client';
 
 import { format } from 'date-fns';
-import { Button } from '../../components/Buttons/Buttons';
+import { Button } from '../../components/Button/Button';
 import styles from './page.module.css';
 import { useRouter } from 'next/navigation';
 import { Input } from '../../components/Input/Input';
@@ -100,7 +100,7 @@ const TransactionsPage = ({ transactions }: TransactionsPageProps) => {
                 </td>
                 <td className={styles.tableData}>wallet name</td>
                 <td className={styles.tableData}>{transaction.description}</td>
-                <td className={styles.tableData}>{transaction.amount}</td>
+                <td className={styles.tableData}>€{(transaction.amount).toFixed(2)}</td>
                 <td className={styles.tableData}>{transaction.type}</td>
                 <td className={styles.tableData}>
                   {format(transaction.createdAt, 'dd.MM.yyyy HH:mm')}

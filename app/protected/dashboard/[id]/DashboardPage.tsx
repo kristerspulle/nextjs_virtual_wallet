@@ -1,6 +1,6 @@
 'use client';
 
-import { Button } from '@/app/components/Buttons/Buttons';
+import { Button } from '@/app/components/Button/Button';
 import styles from './page.module.css';
 import { useState } from 'react';
 import NewTransactionModal from '@/app/components/NewTransactionModal/NewTransactionModal';
@@ -23,7 +23,7 @@ const DashboardPage = ({ wallet, transactions }: DashboardPageProps) => {
     .filter((transaction) => transaction.type === 'Outgoing')
     .reduce((total, transaction) => total + transaction.amount, 0);
 
-  const balance = incomingTotal - outgoingTotal;
+  const balance = (incomingTotal - outgoingTotal).toFixed(2);
 
   const transactionsToShow = transactions.slice(0, displayedTransactions);
 
@@ -48,9 +48,9 @@ const DashboardPage = ({ wallet, transactions }: DashboardPageProps) => {
       </div>
       <div className={styles.details}>
         <div className={styles.balanceInfo}>
-          <div className={styles.balance}>{balance}</div>
-          <div className={styles.incoming}>{incomingTotal.toFixed(2)}</div>
-          <div className={styles.outgoing}>{outgoingTotal.toFixed(2)}</div>
+          <div className={styles.balance}>€{balance}</div>
+          <div className={styles.incoming}>€{incomingTotal.toFixed(2)}</div>
+          <div className={styles.outgoing}>€{outgoingTotal.toFixed(2)}</div>
         </div>
         <div>
           <table className={styles.recent}>
@@ -69,7 +69,7 @@ const DashboardPage = ({ wallet, transactions }: DashboardPageProps) => {
                     <td className={styles.tableData}>
                       {transaction.description}
                     </td>
-                    <td className={styles.tableData}>{transaction.amount}</td>
+                    <td className={styles.tableData}>€{(transaction.amount).toFixed(2)}</td>
                     <td className={styles.tableData}>{transaction.type}</td>
                     <td className={styles.tableData}>
                       {format(transaction.createdAt, 'dd.MM.yyyy HH:mm')}
@@ -80,7 +80,9 @@ const DashboardPage = ({ wallet, transactions }: DashboardPageProps) => {
             </tbody>
           </table>
           <div>
-            {transactions.length <= transactionsToShow.length ? (
+            {transactions.length <= 5 ? (
+              ''
+            ) : transactions.length <= transactionsToShow.length ? (
               <Button
                 text="Collapse"
                 type="button"

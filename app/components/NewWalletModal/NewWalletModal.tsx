@@ -3,7 +3,7 @@
 import { useState } from 'react';
 import styles from './NewWalletModal.module.css';
 import { Input } from '../Input/Input';
-import { Button } from '../Buttons/Buttons';
+import { Button } from '../Button/Button';
 import { useRouter } from 'next/navigation';
 
 type ModalProps = {
@@ -17,7 +17,7 @@ const addNewWallet = async (formValue: string) => {
     headers: {
       'Content-type': 'application/json',
     },
-    body: JSON.stringify({name: formValue}),
+    body: JSON.stringify({ name: formValue }),
   });
 
   return newWallet.json();
@@ -25,7 +25,7 @@ const addNewWallet = async (formValue: string) => {
 
 const NewWalletModal = ({ isOpen, onClose }: ModalProps) => {
   const [formValues, setFormValues] = useState('');
-  const router = useRouter()
+  const router = useRouter();
   return (
     <div
       className={isOpen ? styles.openModal : styles.closedModal}
@@ -37,7 +37,7 @@ const NewWalletModal = ({ isOpen, onClose }: ModalProps) => {
         onSubmit={(e) => {
           e.preventDefault();
           addNewWallet(formValues);
-          router.refresh()
+          router.refresh();
           setFormValues('');
         }}
       >

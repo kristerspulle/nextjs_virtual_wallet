@@ -3,7 +3,6 @@
 type ButtonProps = {
   type: HTMLButtonElement['type'],
   text: string,
-  walletId?: string,
   onClick?: () => void
 }
 
