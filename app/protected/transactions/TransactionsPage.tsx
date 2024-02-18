@@ -100,7 +100,15 @@ const TransactionsPage = ({ transactions }: TransactionsPageProps) => {
                 </td>
                 <td className={styles.tableData}>wallet name</td>
                 <td className={styles.tableData}>{transaction.description}</td>
-                <td className={styles.tableData}>€{(transaction.amount).toFixed(2)}</td>
+                <td
+                  className={`${styles.tableData} ${
+                    transaction.type === 'Incoming'
+                      ? styles.incoming
+                      : styles.outgoing
+                  }`}
+                >
+                  €{transaction.amount.toFixed(2)}
+                </td>
                 <td className={styles.tableData}>{transaction.type}</td>
                 <td className={styles.tableData}>
                   {format(transaction.createdAt, 'dd.MM.yyyy HH:mm')}
@@ -113,6 +121,7 @@ const TransactionsPage = ({ transactions }: TransactionsPageProps) => {
                       deleteTransaction(transaction._id);
                       router.refresh();
                     }}
+                    buttonColor="red"
                   />
                 </td>
               </tr>

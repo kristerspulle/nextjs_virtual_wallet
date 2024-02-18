@@ -49,8 +49,8 @@ const DashboardPage = ({ wallet, transactions }: DashboardPageProps) => {
       <div className={styles.details}>
         <div className={styles.balanceInfo}>
           <div className={styles.balance}>€{balance}</div>
-          <div className={styles.incoming}>€{incomingTotal.toFixed(2)}</div>
-          <div className={styles.outgoing}>€{outgoingTotal.toFixed(2)}</div>
+          <div className={styles.incomingTotal}>€{incomingTotal.toFixed(2)}</div>
+          <div className={styles.outgoingTotal}>€{outgoingTotal.toFixed(2)}</div>
         </div>
         <div>
           <table className={styles.recent}>
@@ -69,7 +69,11 @@ const DashboardPage = ({ wallet, transactions }: DashboardPageProps) => {
                     <td className={styles.tableData}>
                       {transaction.description}
                     </td>
-                    <td className={styles.tableData}>€{(transaction.amount).toFixed(2)}</td>
+                    <td className={`${styles.tableData} ${
+                    transaction.type === 'Incoming'
+                      ? styles.incoming
+                      : styles.outgoing
+                  }`}>€{(transaction.amount).toFixed(2)}</td>
                     <td className={styles.tableData}>{transaction.type}</td>
                     <td className={styles.tableData}>
                       {format(transaction.createdAt, 'dd.MM.yyyy HH:mm')}

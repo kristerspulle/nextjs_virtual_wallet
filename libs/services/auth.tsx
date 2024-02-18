@@ -7,7 +7,10 @@ interface UserLoginData {
   password: string;
 }
 
-export const loginUser = async ({ username, password }: UserLoginData): Promise<IUser | null> => {
+export const loginUser = async ({
+  username,
+  password,
+}: UserLoginData): Promise<IUser | null> => {
   await connectToDB();
   if (!username || !password) {
     throw new Error('Username or Password was not provided');
@@ -29,6 +32,5 @@ export const loginUser = async ({ username, password }: UserLoginData): Promise<
   } else {
     throw new Error('Something went wrong X_X');
   }
-
   return user;
 };

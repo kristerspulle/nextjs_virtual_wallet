@@ -3,19 +3,20 @@
 import Link from 'next/link';
 import styles from './Sidebar.module.css';
 import Image from 'next/image';
-import { usePathname, useRouter } from 'next/navigation';
+import { useRouter } from 'next/navigation';
 import { Button } from '../Button/Button';
-import { signOut } from 'next-auth/react';
+import { signOut, useSession } from 'next-auth/react';
 
 export const Sidebar = () => {
   const router = useRouter();
+  const session = useSession()
   const handleSignOut = () => {
     signOut({ callbackUrl: 'http://localhost:3000/' })
     localStorage.removeItem('lastOpenedWalletId')
   }
   return (
     <nav className={styles.sidebar}>
-      <Link href={'/'} className={styles.logo}>
+      <div className={styles.logo}>
         <Image
           priority={true}
           className={styles.image}
@@ -25,7 +26,7 @@ export const Sidebar = () => {
           alt={'icon'}
         />
         Wallet
-      </Link>
+      </div>
       <a
         className={styles.link}
         onClick={() =>{
@@ -53,6 +54,7 @@ export const Sidebar = () => {
           text="Logout"
           type="button"
           onClick={() => handleSignOut()}
+          buttonColor='red'
         />
       </div>
     </nav>

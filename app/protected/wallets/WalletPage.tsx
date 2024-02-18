@@ -106,18 +106,24 @@ const WalletPage = ({ wallets }: WalletsPageProps) => {
                   type="button"
                   text="Open"
                   onClick={() => handleOpenWallet(wallet._id)}
+                  buttonColor='green'
+                  textColor='blackText'
                 />
                 {editingWalletId === wallet._id ? (
                   <Button
                     type="button"
                     text="Save"
                     onClick={() => handleSave(wallet._id)}
+                    buttonColor='green'
+                    textColor='blackText'
                   />
                 ) : (
                   <Button
                     type="button"
                     text="Edit"
                     onClick={() => handleEdit(wallet._id)}
+                    buttonColor='yellow'
+                    textColor='blackText'
                   />
                 )}
                 <Button
@@ -127,6 +133,8 @@ const WalletPage = ({ wallets }: WalletsPageProps) => {
                     deleteWallet(wallet._id);
                     router.refresh();
                   }}
+                  buttonColor='red'
+                  textColor='blackText'
                 />
               </td>
             </tr>

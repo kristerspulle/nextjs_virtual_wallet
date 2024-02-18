@@ -1,51 +1,52 @@
-.wrapper{
+.wrapper {
   display: flex;
   padding: 50px 60px;
   flex-direction: column;
   width: 100%;
 }
 
-.header{
+.header {
   display: flex;
   margin-bottom: 30px;
   justify-content: space-between;
   align-items: center;
 }
 
-.details{
+.details {
   display: flex;
   gap: 20px;
   flex-direction: column;
 }
 
-.balanceInfo{
+.balanceInfo {
   display: flex;
   gap: 40px;
+  justify-content: center;
 }
 
-.balance{
+.balance {
   padding: 50px;
   background-color: white;
   font-size: 30px;
   border-radius: 15px;
 }
 
-.currency{
+.currency {
   padding: 50px;
   background-color: white;
   font-size: 30px;
   border-radius: 15px;
 }
 
-.incoming{
+.incomingTotal {
   padding: 50px;
   background-color: white;
   font-size: 30px;
   border-radius: 15px;
-  color: green
+  color: green;
 }
 
-.outgoing{
+.outgoingTotal {
   padding: 50px;
   background-color: white;
   font-size: 30px;
@@ -53,7 +54,7 @@
   color: red;
 }
 
-.recent{
+.recent {
   padding: 50px;
   background-color: white;
   font-size: 30px;
@@ -67,7 +68,7 @@
   text-align: center;
 }
 
-.headerText{
+.headerText {
   display: flex;
   flex-direction: column;
 }
@@ -78,6 +79,14 @@
   padding: 5px 0;
 }
 
-.showMore{
+.showMore {
   display: none;
+}
+
+.incoming {
+  color: green;
+}
+
+.outgoing {
+  color: red;
 }
