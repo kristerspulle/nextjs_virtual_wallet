@@ -15,7 +15,7 @@ const getWallets = async () => {
 
 
 
-export const Wallets = async () => {
+const Wallets = async () => {
   const wallets = await getWallets()
   return(
     <WalletPage wallets={wallets}/>
