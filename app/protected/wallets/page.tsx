@@ -13,8 +13,6 @@ const getWallets = async () => {
   }
 }
 
-
-
 const Wallets = async () => {
   const wallets = await getWallets()
   return(
@@ -22,4 +20,4 @@ const Wallets = async () => {
   )
 }
 
-export default Wallets
+export default Wallets;
