@@ -3,7 +3,7 @@ import { connectToDB } from '@/libs/database/connectToDB';
 import Transactions from '@/libs/models/transactions';
 import { NextRequest, NextResponse } from 'next/server';
 import { getServerSession } from 'next-auth';
-import { authOptions } from '../auth/[...nextauth]/route';
+import { authOptions } from '@/libs/services/authOptions';
 
 export const GET = async (request: NextRequest) => {
   try {
