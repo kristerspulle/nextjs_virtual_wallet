@@ -16,6 +16,7 @@ const userSchema = new Schema(
 );
 
 export interface IUser extends Document {
+  id: string;
   username: string;
   password: string;
   createdAt: string;
