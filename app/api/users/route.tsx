@@ -1,18 +1,7 @@
 import { connectToDB } from '@/libs/database/connectToDB';
 import Users from '@/libs/models/users';
 import { NextRequest, NextResponse } from 'next/server';
-import { getServerSession } from 'next-auth/next';
-import authOptions from '@/libs/services/authOptions';
 import { hash } from 'bcryptjs';
-
-export const GET = async () => {
-  const session = await getServerSession(authOptions);
-
-  if (!session) {
-    return NextResponse.json({ message: 'Login to acess this page' });
-  }
-  return NextResponse.json({ message: 'Hello' });
-};
 
 export const POST = async (request: NextRequest) => {
   try {
