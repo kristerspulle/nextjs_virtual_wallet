@@ -2,7 +2,6 @@ import { connectToDB } from '@/libs/database/connectToDB';
 import Wallet from '@/libs/models/wallet';
 import { NextRequest, NextResponse } from 'next/server';
 
-
 export const GET = async (request: NextRequest, { params }: { params: { id: string } }) => {
   try {
     await connectToDB();
