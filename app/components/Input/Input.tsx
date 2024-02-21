@@ -1,4 +1,3 @@
-import { ChangeEvent } from 'react';
 import styles from './Input.module.css';
 
 type InputProps = {
@@ -7,7 +6,7 @@ type InputProps = {
   placeholder?: string;
   label?: string;
   value: string;
-  onChange: (e) => void;
+  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   required: boolean;
   checked?: boolean
 };
