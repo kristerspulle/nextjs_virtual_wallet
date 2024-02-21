@@ -4,7 +4,7 @@ import './globals.css';
 import Sidebar from './components/Sidebar/Sidebar';
 import { Provider } from './components/Provider';
 import { getServerSession } from 'next-auth';
-import authOptions from '@/libs/services/authOptions';
+import { authOptions } from './api/auth/[...nextauth]/route';
 
 const quicksand = Quicksand({ subsets: ['latin'] });
 
