@@ -13,7 +13,7 @@ const getWallets = async () => {
   }
 }
 
-const Wallets = async () => {
+const Wallets: React.FC = async () => {
   const wallets = await getWallets()
   return(
     <WalletPage wallets={wallets}/>
