@@ -87,7 +87,7 @@ const WalletPage = ({ wallets }: WalletsPageProps) => {
         </thead>
         <tbody>
           {wallets.map((wallet: Wallet) => (
-            <tr key={wallet._id}>
+            <tr className={styles.tableRow} key={wallet._id}>
               <td className={styles.tableData}>
                 {editingWalletId === wallet._id ? (
                   <Input
