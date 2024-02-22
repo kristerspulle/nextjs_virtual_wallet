@@ -6,7 +6,6 @@ import NewWalletModal from '../../components/NewWalletModal/NewWalletModal';
 import styles from './page.module.css';
 import { Input } from '../../components/Input/Input';
 import { useRouter } from 'next/navigation';
-import { useSession } from 'next-auth/react';
 
 type WalletsPageProps = {
   wallets: Wallet[];
@@ -30,7 +29,7 @@ const WalletPage = ({ wallets }: WalletsPageProps) => {
   };
 
   const deleteWallet = async (id: string) => {
-    const response = await fetch(`http://localhost:3000/api/wallets/${id}`, {
+    const response = await fetch(`/api/wallets/${id}`, {
       method: 'DELETE',
       cache: 'no-store',
     });
@@ -42,16 +41,13 @@ const WalletPage = ({ wallets }: WalletsPageProps) => {
   };
 
   const handleSave = async (id: string) => {
-    const editWalletName = await fetch(
-      `http://localhost:3000/api/wallets/${id}`,
-      {
-        method: 'PATCH',
-        headers: {
-          'Content-type': 'application/json',
-        },
-        body: JSON.stringify(walletNameValue),
-      }
-    );
+    const editWalletName = await fetch(`/api/wallets/${id}`, {
+      method: 'PATCH',
+      headers: {
+        'Content-type': 'application/json',
+      },
+      body: JSON.stringify(walletNameValue),
+    });
     router.refresh();
     setEditingWalletId(null);
     return editWalletName.json();
@@ -107,24 +103,24 @@ const WalletPage = ({ wallets }: WalletsPageProps) => {
                   type="button"
                   text="Open"
                   onClick={() => handleOpenWallet(wallet._id)}
-                  buttonColor='green'
-                  textColor='blackText'
+                  buttonColor="green"
+                  textColor="blackText"
                 />
                 {editingWalletId === wallet._id ? (
                   <Button
                     type="button"
                     text="Save"
                     onClick={() => handleSave(wallet._id)}
-                    buttonColor='green'
-                    textColor='blackText'
+                    buttonColor="green"
+                    textColor="blackText"
                   />
                 ) : (
                   <Button
                     type="button"
                     text="Edit"
                     onClick={() => handleEdit(wallet._id)}
-                    buttonColor='yellow'
-                    textColor='blackText'
+                    buttonColor="yellow"
+                    textColor="blackText"
                   />
                 )}
                 <Button
@@ -132,10 +128,11 @@ const WalletPage = ({ wallets }: WalletsPageProps) => {
                   text="Delete"
                   onClick={() => {
                     deleteWallet(wallet._id);
+                    localStorage.removeItem('lastOpenedWalletId')
                     router.refresh();
                   }}
-                  buttonColor='red'
-                  textColor='blackText'
+                  buttonColor="red"
+                  textColor="blackText"
                 />
               </td>
             </tr>

@@ -12,7 +12,7 @@ type ModalProps = {
 };
 
 const addNewWallet = async (formValue: string) => {
-  const newWallet = await fetch('http://localhost:3000/api/wallets', {
+  const newWallet = await fetch(`/api/wallets`, {
     method: 'POST',
     headers: {
       'Content-type': 'application/json',

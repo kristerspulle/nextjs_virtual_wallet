@@ -2,7 +2,7 @@ import { headers } from 'next/headers';
 import WalletPage from './WalletPage';
 
 const getWallets = async () => {
-  const response = await fetch('http://localhost:3000/api/wallets', {
+  const response = await fetch(`${process.env.NEXTAUTH_URL}/api/wallets`, {
     cache: 'no-store',
     headers: headers()
   });

@@ -12,7 +12,7 @@ type TransactionsPageProps = {
 
 const deleteTransaction = async (id: string) => {
   const delTransaction = await fetch(
-    `http://localhost:3000/api/transactions/${id}`,
+    `/api/transactions/${id}`,
     {
       method: 'DELETE',
       headers: {

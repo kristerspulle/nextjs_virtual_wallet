@@ -10,7 +10,7 @@ const addUser = async (userCredentials: {
   username: string;
   password: string;
 }) => {
-  const newuser = await fetch('/api/users', {
+  const newuser = await fetch(`${process.env.NEXTAUTH_URL}/api/users`, {
     method: 'POST',
     headers: {
       'Content-type': 'application/json',

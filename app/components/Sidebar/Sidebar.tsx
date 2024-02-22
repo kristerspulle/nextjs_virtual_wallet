@@ -11,7 +11,7 @@ export const Sidebar = () => {
   const router = useRouter();
   const session = useSession()
   const handleSignOut = () => {
-    signOut({ callbackUrl: 'http://localhost:3000/' })
+    signOut({ callbackUrl: process.env.NEXTAUTH_URL })
     localStorage.removeItem('lastOpenedWalletId')
   }
   return (

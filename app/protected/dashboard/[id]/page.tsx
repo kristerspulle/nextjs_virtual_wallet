@@ -1,7 +1,7 @@
 import DashboardPage from './DashboardPage'
 
 const getWalletData = async (id: string) => {
-  const response = await fetch(`http://localhost:3000/api/wallets/${id}`, {
+  const response = await fetch(`${process.env.NEXTAUTH_URL}/api/wallets/${id}`, {
     cache: 'no-store'
   })
 
@@ -13,7 +13,7 @@ const getWalletData = async (id: string) => {
 }
 
 const getTransactionData = async (id: string) => {
-  const response = await fetch(`http://localhost:3000/api/wallets/${id}/transactions`, {
+  const response = await fetch(`${process.env.NEXTAUTH_URL}/api/wallets/${id}/transactions`, {
     cache: 'no-store'
   })
 

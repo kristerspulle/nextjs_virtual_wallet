@@ -2,7 +2,7 @@ import { headers } from 'next/headers';
 import TransactionsPage from './TransactionsPage';
 
 const getTransactions = async () => {
-  const response = await fetch('http://localhost:3000/api/transactions', {
+  const response = await fetch(`${process.env.NEXTAUTH_URL}/api/transactions`, {
     cache: 'no-store',
     headers: headers()
   })

@@ -24,7 +24,7 @@ const NewTransactionModal = ({ isOpen, onClose }: ModalProps) => {
     type: string;
   }) => {
     const newTransaction = await fetch(
-      `http://localhost:3000/api/wallets/${params.id}/transactions`,
+      `/api/wallets/${params.id}/transactions`,
       {
         method: 'POST',
         headers: {
@@ -77,7 +77,7 @@ const NewTransactionModal = ({ isOpen, onClose }: ModalProps) => {
           onChange={(e) => {
             setFormValues({ ...formValues, type: e.target.value });
           }}
-          id='transactionType'
+          id="transactionType"
         >
           <option value="Incoming">Incoming</option>
           <option value="Outgoing">Outgoing</option>
