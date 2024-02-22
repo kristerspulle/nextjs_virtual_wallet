@@ -6,6 +6,7 @@ import NewWalletModal from '../../components/NewWalletModal/NewWalletModal';
 import styles from './page.module.css';
 import { Input } from '../../components/Input/Input';
 import { useRouter } from 'next/navigation';
+import { useSession } from 'next-auth/react';
 
 type WalletsPageProps = {
   wallets: Wallet[];
@@ -16,6 +17,7 @@ const WalletPage = ({ wallets }: WalletsPageProps) => {
   const [walletNameValue, setWalletNameValue] = useState('');
   const [editingWalletId, setEditingWalletId] = useState<string | null>(null);
   const router = useRouter();
+  const session = useSession()
 
   const handleEdit = (walletId: string) => {
     const walletToEdit = wallets.find((wallet) => wallet._id === walletId);
