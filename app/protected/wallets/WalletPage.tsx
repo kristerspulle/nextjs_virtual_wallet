@@ -17,7 +17,6 @@ const WalletPage = ({ wallets }: WalletsPageProps) => {
   const [walletNameValue, setWalletNameValue] = useState('');
   const [editingWalletId, setEditingWalletId] = useState<string | null>(null);
   const router = useRouter();
-  const session = useSession()
 
   const handleEdit = (walletId: string) => {
     const walletToEdit = wallets.find((wallet) => wallet._id === walletId);

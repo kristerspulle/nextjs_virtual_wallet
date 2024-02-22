@@ -10,7 +10,7 @@ const addUser = async (userCredentials: {
   username: string;
   password: string;
 }) => {
-  const newuser = await fetch('http://localhost:3000/api/users', {
+  const newuser = await fetch('/api/users', {
     method: 'POST',
     headers: {
       'Content-type': 'application/json',
