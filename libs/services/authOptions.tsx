@@ -50,7 +50,7 @@ const authOptions: NextAuthOptions = {
     strategy: 'jwt',
   },
   pages: {
-    signOut: '/',
+    signOut: process.env.NEXTAUTH_URL,
   },
 };
 
