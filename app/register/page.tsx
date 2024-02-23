@@ -29,9 +29,9 @@ const Register = () => {
   });
   const router = useRouter();
 
-  const handleSubmit = () => {
+  const handleSubmit = async () => {
     if (formValues.password === formValues.repeatedPassword) {
-      addUser(formValues);
+      await addUser(formValues);
       router.push('/api/auth/signin');
     } else {
       alert("Password didn't match");
