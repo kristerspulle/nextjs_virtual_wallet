@@ -49,9 +49,6 @@ const authOptions: NextAuthOptions = {
   session: {
     strategy: 'jwt',
   },
-  pages: {
-    signOut: process.env.NEXTAUTH_URL,
-  },
 };
 
 export default authOptions;
