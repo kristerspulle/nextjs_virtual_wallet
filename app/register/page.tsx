@@ -5,6 +5,7 @@ import { useState } from 'react';
 import { Button } from '../components/Button/Button';
 import { Input } from '../components/Input/Input';
 import { useRouter } from 'next/navigation';
+import { useSession } from 'next-auth/react';
 
 const addUser = async (userCredentials: {
   username: string;
@@ -22,13 +23,14 @@ const addUser = async (userCredentials: {
 };
 
 const Register = () => {
+  const session = useSession()
   const [formValues, setFormValues] = useState({
     username: '',
     password: '',
     repeatedPassword: '',
   });
   const router = useRouter();
-
+  console.log(session.status)
   const handleSubmit = async () => {
     if (formValues.password === formValues.repeatedPassword) {
       await addUser(formValues);
