@@ -6,7 +6,9 @@ export const config = { matcher: "/protected/(.*)"}
 
 // Using Next.js 
 export function authenticationMiddleware(request: NextApiRequest) {
-  if (!request.headers.cookies?.includes('authenticated=true')) {
+  console.log(request.headers.cookie);
+  
+  if (!request.headers.cookie?.includes('authenticated=true')) {
 
     return NextResponse.redirect('/api/auth/signin');
   }
