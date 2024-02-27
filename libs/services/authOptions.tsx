@@ -33,9 +33,6 @@ const authOptions: NextAuthOptions = {
     }),
   ],
   callbacks: {
-    async signIn() {
-      return true
-    },
     session: async ({ session, token }) => {
       if (session?.user) {
         session.user.id = token.uid;
@@ -53,9 +50,9 @@ const authOptions: NextAuthOptions = {
     strategy: 'jwt',
   },
   secret: process.env.NEXTAUTH_SECRET,
-  // pages: {
-  //   signIn: '/signin'
-  // }
+  pages: {
+    signIn: '/signin'
+  }
 };
 
 export default authOptions;

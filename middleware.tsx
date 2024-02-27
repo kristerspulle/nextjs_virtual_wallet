@@ -1,12 +1,9 @@
-import { getServerSession } from 'next-auth';
-import { getSession } from 'next-auth/react';
-import { NextRequest, NextResponse } from 'next/server';
-export { default } from "next-auth/middleware"
+import withAuth from 'next-auth/middleware';
 
-export const config = { matcher: "/protected/:path*"}
+export default withAuth({
+  pages: {
+    signIn: '/signin',
+  }
+});
 
-// Using Next.js 
-// export async function authenticationMiddleware(request: NextRequest) {
-//   const session = await getServerSession()
-//   return NextResponse.next();
-// }
+export const config = { matcher: "/protected/:path*"};

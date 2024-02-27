@@ -4,6 +4,7 @@ import styles from './page.module.css';
 import { useState } from 'react';
 import { Input } from '../components/Input/Input';
 import { Button } from '../components/Button/Button';
+import { signIn } from 'next-auth/react';
 
 const SignIn = () => {
   const [formValues, setFormValues] = useState({ username: '', password: '' });
@@ -14,7 +15,18 @@ const SignIn = () => {
         If you don`t have an account already, just fill in your credentials and
         an account will be created for you!
       </p>
-      <form className={styles.form} onSubmit={() => ''}>
+      <form
+        className={styles.form}
+        onSubmit={async (e) => {
+          e.preventDefault()
+          await signIn('credentials', {
+            callbackurl: '/protected/wallets',
+            username: formValues.username,
+            password: formValues.password,
+          })
+        }
+        }
+      >
         <Input
           id="username"
           type="text"
