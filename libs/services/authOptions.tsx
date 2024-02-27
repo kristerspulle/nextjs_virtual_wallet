@@ -1,5 +1,5 @@
 import { loginUser } from '@/libs/services/auth';
-import  { NextAuthOptions } from 'next-auth';
+import { NextAuthOptions } from 'next-auth';
 import CredentialsProvider from 'next-auth/providers/credentials';
 
 type Credentials = {
@@ -33,6 +33,9 @@ const authOptions: NextAuthOptions = {
     }),
   ],
   callbacks: {
+    async signIn() {
+      return true
+    },
     session: async ({ session, token }) => {
       if (session?.user) {
         session.user.id = token.uid;
@@ -48,7 +51,7 @@ const authOptions: NextAuthOptions = {
   },
   session: {
     strategy: 'jwt',
-  }, 
+  },
   secret: process.env.NEXTAUTH_SECRET,
   // pages: {
   //   signIn: '/signin'
