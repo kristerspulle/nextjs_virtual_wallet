@@ -1,15 +1,12 @@
-import { useSession } from 'next-auth/react';
+import { getServerSession } from 'next-auth';
+import { getSession } from 'next-auth/react';
 import { NextRequest, NextResponse } from 'next/server';
-import { NextApiRequest } from 'next/types';
 export { default } from "next-auth/middleware"
 
 export const config = { matcher: "/protected/(.*)"}
 
 // Using Next.js 
-export function authenticationMiddleware(request: NextApiRequest) {
-  if (!request.headers.cookie?.includes('authenticated=true')) {
-
-    return NextResponse.redirect('/api/auth/signin');
-  }
-  return NextResponse.next();
-}
+// export async function authenticationMiddleware(request: NextRequest) {
+//   const session = await getServerSession()
+//   return NextResponse.next();
+// }
