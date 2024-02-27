@@ -19,7 +19,6 @@ const SignIn = () => {
             callbackurl: '/protected/wallets',
             username: formValues.username,
             password: formValues.password,
-            redirect: false
           })
         }
         }

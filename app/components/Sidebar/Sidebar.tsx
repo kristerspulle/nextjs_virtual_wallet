@@ -5,11 +5,10 @@ import styles from './Sidebar.module.css';
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 import { Button } from '../Button/Button';
-import { signOut, useSession } from 'next-auth/react';
+import { signOut } from 'next-auth/react';
 
 export const Sidebar = () => {
   const router = useRouter();
-  const session = useSession()
   const handleSignOut = () => {
     signOut({ callbackUrl: process.env.NEXTAUTH_URL })
     localStorage.removeItem('lastOpenedWalletId')
