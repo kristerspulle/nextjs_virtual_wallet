@@ -11,10 +11,6 @@ const SignIn = () => {
   return (
     <main className={styles.main}>
       <h1>Sign In</h1>
-      <p>
-        If you don`t have an account already, just fill in your credentials and
-        an account will be created for you!
-      </p>
       <form
         className={styles.form}
         onSubmit={async (e) => {
@@ -23,6 +19,7 @@ const SignIn = () => {
             callbackurl: '/protected/wallets',
             username: formValues.username,
             password: formValues.password,
+            redirect: false
           })
         }
         }
@@ -47,7 +44,7 @@ const SignIn = () => {
             setFormValues({ ...formValues, password: e.target.value });
           }}
         />
-        <Button type="submit" text="Sign in / Register" />
+        <Button type="submit" text="Sign in" />
       </form>
     </main>
   );
