@@ -1,9 +1,8 @@
 import { headers } from 'next/headers';
 import WalletPage from './WalletPage';
+import { getServerSession } from 'next-auth';
 import authOptions from '@/libs/services/authOptions';
-import { AuthOptions, getServerSession } from 'next-auth';
-import { IncomingMessage, ServerResponse } from 'http';
-import { NextApiRequest, NextApiResponse } from 'next';
+import { redirect } from 'next/navigation';
 
 const getWallets = async () => {
   const response = await fetch(`${process.env.NEXTAUTH_URL}/api/wallets`, {
@@ -18,6 +17,10 @@ const getWallets = async () => {
 }
 
 const Wallets: React.FC = async () => {
+  const session = await getServerSession(authOptions)
+  if(!session) {
+    redirect('/api/auth/signin')
+  }
   const wallets = await getWallets()
   return(
     <WalletPage wallets={wallets}/>
@@ -25,15 +28,3 @@ const Wallets: React.FC = async () => {
 }
 
 export default Wallets;
-
-export async function getServerSideProps(context: any) {
-  return {
-    props: {
-      session: await getServerSession(
-        context.req,
-        context.res,
-        authOptions
-      ),
-    },
-  }
-}
