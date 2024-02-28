@@ -5,23 +5,25 @@ import { useState } from 'react';
 import { Input } from '../components/Input/Input';
 import { Button } from '../components/Button/Button';
 import { signIn } from 'next-auth/react';
+import { useRouter } from 'next/navigation';
 
 const SignIn = () => {
   const [formValues, setFormValues] = useState({ username: '', password: '' });
+  const router = useRouter();
   return (
     <main className={styles.main}>
       <h1>Sign In</h1>
       <form
         className={styles.form}
         onSubmit={async (e) => {
-          e.preventDefault()
+          e.preventDefault();
           await signIn('credentials', {
             callbackurl: '/protected/wallets',
             username: formValues.username,
             password: formValues.password,
-          })
-        }
-        }
+          });
+          router.push('/protected/wallets');
+        }}
       >
         <Input
           id="username"

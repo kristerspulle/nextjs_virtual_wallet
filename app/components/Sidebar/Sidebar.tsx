@@ -10,7 +10,7 @@ import { signOut } from 'next-auth/react';
 export const Sidebar = () => {
   const router = useRouter();
   const handleSignOut = () => {
-    signOut({ callbackUrl: process.env.NEXTAUTH_URL })
+    signOut({ callbackUrl: '/' })
     localStorage.removeItem('lastOpenedWalletId')
   }
   return (
@@ -48,7 +48,6 @@ export const Sidebar = () => {
         transactions
       </Link>
       <div className={''}>
-        <div>Hello</div>
         <Button
           text="Logout"
           type="button"

@@ -6,7 +6,7 @@ const getTransactions = async () => {
     cache: 'no-store',
     headers: new Headers(headers())
   })
-
+  
   if(!response.ok) {
     console.log(response)
   } else {
@@ -16,6 +16,7 @@ const getTransactions = async () => {
 
 const Transactions = async () => {
   const transactions = await getTransactions()
+
   return(
     <TransactionsPage transactions={transactions}/>
   )
