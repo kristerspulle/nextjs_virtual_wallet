@@ -74,6 +74,7 @@ const NewTransactionModal = ({ isOpen, onClose }: ModalProps) => {
           }}
         />
         <select
+          value={formValues.type}
           onChange={(e) => {
             setFormValues({ ...formValues, type: e.target.value });
           }}

@@ -65,6 +65,9 @@ const TransactionsPage = ({ transactions }: TransactionsPageProps) => {
         <h1>Transactions</h1>
         <p>All of the transactions for your Account</p>
       </div>
+      {transactions.length === 0 ? (
+        <h1>There are no transactions made in any of your wallets.</h1>
+      ) : (
       <table className={`${styles.table} table table-bordered`}>
         <thead>
           <tr>
@@ -129,6 +132,7 @@ const TransactionsPage = ({ transactions }: TransactionsPageProps) => {
           })}
         </tbody>
       </table>
+      )}
     </main>
   );
 };

@@ -72,6 +72,9 @@ const WalletPage = ({ wallets }: WalletsPageProps) => {
           />
         </div>
       </div>
+      {wallets.length === 0 ? (
+        <h1>Create a wallet first</h1>
+      ) : (
       <table
         data-toggle="table"
         className={`${styles.table} table-primary table-hover`}
@@ -139,6 +142,7 @@ const WalletPage = ({ wallets }: WalletsPageProps) => {
           ))}
         </tbody>
       </table>
+      )}
     </main>
   );
 };
