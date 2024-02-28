@@ -4,7 +4,7 @@ import TransactionsPage from './TransactionsPage';
 const getTransactions = async () => {
   const response = await fetch(`${process.env.NEXTAUTH_URL}/api/transactions`, {
     cache: 'no-store',
-    headers: headers()
+    headers: new Headers(headers())
   })
 
   if(!response.ok) {
