@@ -8,16 +8,15 @@ const getTransactions = async () => {
   })
   
   if(!response.ok) {
-    // console.log(response)
-    throw(response)
+    console.log(response)
   } else {
     return response.json()
   }
 }
 
-const Transactions = async () => {
+const Transactions: React.FC = async () => {
   const transactions = await getTransactions()
-  console.log(transactions)
+
   return(
     <TransactionsPage transactions={transactions}/>
   )
