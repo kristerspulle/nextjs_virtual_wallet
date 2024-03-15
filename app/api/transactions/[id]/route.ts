@@ -5,8 +5,8 @@ import { NextRequest, NextResponse } from 'next/server';
 export const DELETE = async (request: NextRequest, { params }: { params: { id: string } }) => {
   try {
     await connectToDB();
-    const deleteWallet = await Transaction.findByIdAndDelete(params.id)
-    return new NextResponse(JSON.stringify(deleteWallet))
+    const deleteTransaction = await Transaction.findByIdAndDelete(params.id)
+    return new NextResponse(JSON.stringify(deleteTransaction))
   } catch (error) {
     return new NextResponse('An error occured while deleting transaction: ' + error);
   }

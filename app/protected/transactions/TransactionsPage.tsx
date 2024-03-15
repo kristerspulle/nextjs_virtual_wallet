@@ -39,25 +39,25 @@ const TransactionsPage = ({ transactions }: TransactionsPageProps) => {
     });
   };
 
-  useEffect(() => {
-    const storedFraudulentTransactions = localStorage.getItem(
-      'fraudulentTransactions'
-    );
-    if (storedFraudulentTransactions) {
-      const parsedTransactions = JSON.parse(storedFraudulentTransactions);
+  // useEffect(() => {
+  //   const storedFraudulentTransactions = localStorage.getItem(
+  //     'fraudulentTransactions'
+  //   );
+  //   if (storedFraudulentTransactions) {
+  //     const parsedTransactions = JSON.parse(storedFraudulentTransactions);
 
-      if (Array.isArray(parsedTransactions) && parsedTransactions.length > 0) {
-        setFraudulentTransactions(parsedTransactions);
-      }
-    }
-  }, []);
+  //     if (Array.isArray(parsedTransactions) && parsedTransactions.length > 0) {
+  //       setFraudulentTransactions(parsedTransactions);
+  //     }
+  //   }
+  // }, []);
 
-  useEffect(() => {
-    localStorage.setItem(
-      'fraudulentTransactions',
-      JSON.stringify(fraudulentTransactions)
-    );
-  }, [fraudulentTransactions]);
+  // useEffect(() => {
+  //   localStorage.setItem(
+  //     'fraudulentTransactions',
+  //     JSON.stringify(fraudulentTransactions)
+  //   );
+  // }, [fraudulentTransactions]);
 
   return (
     <main className={styles.wrapper}>
