@@ -8,9 +8,11 @@ const getTransactions = async () => {
   })
   
   if(!response.ok) {
-    console.log(response)
+    // console.log(response)
+    throw(response)
   } else {
-    return response.json()
+    throw(response.json())
+    // return response.json()
   }
 }
 
