@@ -11,8 +11,7 @@ const getTransactions = async () => {
     // console.log(response)
     throw(response)
   } else {
-    throw(response.json())
-    // return response.json()
+    return response.json()
   }
 }
 
