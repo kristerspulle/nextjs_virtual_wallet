@@ -1,4 +1,4 @@
-import { headers } from 'next/headers';
+// import { headers } from 'next/headers';
 import TransactionsPage from './TransactionsPage';
 
 // const getTransactions = async () => {
