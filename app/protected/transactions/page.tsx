@@ -25,6 +25,8 @@ const getTransactions = async () => {
       headers: new Headers(headers())
     });
 
+    console.log(await response.text()); // Log the raw response body
+
     if (!response.ok) {
       console.error('Failed to fetch transactions:', response.statusText);
       return null;
@@ -37,6 +39,7 @@ const getTransactions = async () => {
     return null;
   }
 };
+
 const Transactions: React.FC = async () => {
   const transactions = await getTransactions()
   console.log(transactions)
