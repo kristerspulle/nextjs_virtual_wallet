@@ -16,9 +16,6 @@ const deleteTransaction = async (id: string) => {
     `/api/transactions/${id}`,
     {
       method: 'DELETE',
-      headers: {
-        'Content-type': 'application/json',
-      },
     }
   );
   return delTransaction.json();
