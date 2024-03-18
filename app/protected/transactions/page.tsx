@@ -29,13 +29,7 @@ const getTransactions = async () => {
       throw new Error(`Failed to fetch transactions: ${response.statusText}`);
     }
 
-    const text = await response.text();
-    if (!text) {
-      throw new Error('Empty response body');
-    }
-
-    const data = JSON.parse(text);
-    return data;
+    return response.json();
   } catch (error) {
     console.error('Error fetching transactions:', error);
     return null;
