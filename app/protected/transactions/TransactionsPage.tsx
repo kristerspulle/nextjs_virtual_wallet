@@ -6,6 +6,7 @@ import styles from './page.module.css';
 import { useRouter } from 'next/navigation';
 import { Input } from '../../components/Input/Input';
 import { useEffect, useState } from 'react';
+
 type TransactionsPageProps = {
   transactions: Transaction[];
 };

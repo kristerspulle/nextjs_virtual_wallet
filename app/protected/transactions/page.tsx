@@ -2,7 +2,7 @@ import { headers } from 'next/headers';
 import TransactionsPage from './TransactionsPage';
 
 const getTransactions = async () => {
-  const response = await fetch(`${process.env.NEXTAUTH_URL}/api/transactions`, {
+  const response = await fetch(`nextjs-virtual-wallet.vercel.app/api/transactions`, {
     cache: 'no-store',
     headers: new Headers(headers())
   })
@@ -16,7 +16,6 @@ const getTransactions = async () => {
 
 const Transactions: React.FC = async () => {
   const transactions = await getTransactions()
-
   return(
     <TransactionsPage transactions={transactions}/>
   )
